@@ -14,7 +14,6 @@ import javax.swing.border.EmptyBorder;
 import equipo.Defensa;
 import equipo.Futbolista;
 import equipo.Gestion;
-import equipo.PieBueno;
 import equipo.Portero;
 import equipo.excepciones.AptitudNoValidaExecption;
 import equipo.excepciones.CadenaVaciaException;
@@ -39,7 +38,7 @@ import javax.swing.SpinnerNumberModel;
  * @version 1.0
  *
  */
-public class AddPortero extends VentanaPadre {
+public class AddDefensa extends VentanaPadre {
 
 	protected final JPanel contentPanel = new JPanel();
 	protected JSpinner porteria0Spiner;
@@ -49,16 +48,15 @@ public class AddPortero extends VentanaPadre {
 	/**
 	 * Create the dialog.
 	 */
-	public AddPortero() {
+	public AddDefensa() {
 		super();
 		diestroButton.setSelected(true);
-		setTitle("Añadir portero");
+		setTitle("Añadir defensa");
 		super.alanteButton.setVisible(false);
 		super.atrasButton.setVisible(false);
 		super.mostrarButton.setVisible(false);
 		super.eliminarButton.setVisible(false);
-
-		setBounds(100, 100, 547, 301);
+		setBounds(100, 100, 549, 301);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(5, 281, 505, 20);
 		contentPanel.setLayout(new FlowLayout());
@@ -80,46 +78,42 @@ public class AddPortero extends VentanaPadre {
 		porteria0Spiner.setBounds(476, 140, 29, 20);
 		getContentPane().add(porteria0Spiner);
 
-		JLabel lblNumeroPenaltis = new JLabel("Goles encajados");
+		JLabel lblNumeroPenaltis = new JLabel("Numero penaltis");
 		lblNumeroPenaltis.setBounds(367, 60, 111, 14);
 		getContentPane().add(lblNumeroPenaltis);
 
-		JLabel jugadasSpinner = new JLabel("Numero de paradas");
-		jugadasSpinner.setBounds(367, 100, 123, 14);
+		JLabel jugadasSpinner = new JLabel("Jugadas cortadas");
+		jugadasSpinner.setBounds(367, 100, 85, 14);
 		getContentPane().add(jugadasSpinner);
 
 		JLabel porteriaCeroSpinner = new JLabel("Porteria a cero");
-		porteriaCeroSpinner.setBounds(367, 143, 111, 14);
+		porteriaCeroSpinner.setBounds(367, 143, 85, 14);
 		getContentPane().add(porteriaCeroSpinner);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(0, 0, 627, 270);
+		getContentPane().add(label);
 	}
 
 	@Override
 	protected void addFutbolista() {
-		
-
-		int golesEncajados = (Integer) panaltilesSpinner.getModel().getValue();
-		int numParadas = (Integer) jugadCorSpinner.getModel().getValue();
+		int numPenaltis = (Integer) panaltilesSpinner.getModel().getValue();
+		int jugadCortadas = (Integer) jugadCorSpinner.getModel().getValue();
 		int porteriaACero = (Integer) porteria0Spiner.getModel().getValue();
 
 		try {
-			Gestion.addPortero(nombreText.getText(), apellidoText.getText(),
+			Gestion.addDefensa(nombreText.getText(), apellidoText.getText(),
 					(Integer) dorsalSpinner.getModel().getValue(), dniText.getText(), pieBueno(), apCombobox(),
-					new Fecha(fechaText.getText()), super.extraerSalarioValido(), numParadas, golesEncajados, porteriaACero);
-			JOptionPane.showMessageDialog(this, "Portero añadido correctamente", "Jugador añadido",
+					new Fecha(fechaText.getText()), extraerSalarioValido(), numPenaltis, jugadCortadas, porteriaACero);
+			JOptionPane.showMessageDialog(this, "Defensa añadido correctamente", "Jugador añadido",
 					JOptionPane.INFORMATION_MESSAGE);
-			Gestion.setModificado(true);
-		
+			//Gestion.setModificado(true);
 		} catch (NoEsDecimalException | DniInvalidoExceptions | CadenaVaciaException | AptitudNoValidaExecption
 				| PieNoValidaExecption | NumeroNegativoException | FechaNegativoException | JugadorYaExisteExeption
 				| JugadorNoExiste | FormatoNoValidoException | FechaNoValidaException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "Jugador añadido",
+			JOptionPane.showMessageDialog(this,e.getMessage(), "Error",
 					JOptionPane.INFORMATION_MESSAGE);
-			
 		}
-
-		
-
-		
 
 	}
 }

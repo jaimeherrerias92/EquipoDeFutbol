@@ -8,7 +8,6 @@ import java.util.Comparator;
 /**
  * @author Jaime Herrerias
  * @version 1.0
- * Interfafaz compara pases dados
  *
  */
 public class ComparadorDePasadores implements Comparator<MedioCentro> {

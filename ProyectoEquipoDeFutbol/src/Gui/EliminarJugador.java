@@ -62,7 +62,7 @@ public class EliminarJugador extends MostrarUnJugador {
 				JOptionPane.showMessageDialog(this, "Jugador eliminado correctamente", "Jugador eliminado",
 						JOptionPane.INFORMATION_MESSAGE);
 				
-				Gestion.setModificado(true);
+				//Gestion.setModificado(true);
 			}
 		} catch (JugadorNoExiste | NumeroNegativoException | DniInvalidoExceptions | CadenaVaciaException e) {
 			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

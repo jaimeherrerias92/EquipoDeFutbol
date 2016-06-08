@@ -14,8 +14,19 @@ public enum Aptitud {
 	
 	private static final Aptitud[] VALUES = Aptitud.values();
 	private Aptitud ap;
-	
-	
+	/**
+	 * 
+	 * @return
+	 */
+	public static String[] generarOpcionesMenu() {
+		String[] opcionesMenu = new String[getValues().length + 1];
+		int i = 0;
+		for (Aptitud aptitud : getValues()) {
+			opcionesMenu[i++] = aptitud.name();
+		}
+		opcionesMenu[i] = "Salir";
+		return opcionesMenu;
+	}
 	/**
 	 * 
 	 * @return

@@ -38,7 +38,8 @@ import javax.swing.SpinnerNumberModel;
  * @version 1.0
  *
  */
-public class AddDelantero extends VentanaPadre {
+
+public class AddMedio extends VentanaPadre {
 
 	protected final JPanel contentPanel = new JPanel();
 	protected JSpinner jugadCorSpinner;
@@ -47,15 +48,16 @@ public class AddDelantero extends VentanaPadre {
 	/**
 	 * Create the dialog.
 	 */
-	public AddDelantero() {
+	public AddMedio() {
 		super();
 		diestroButton.setSelected(true);
-		setTitle("Añadir delantero");
+		setTitle("Añadir centrocampista");
 		super.alanteButton.setVisible(false);
 		super.atrasButton.setVisible(false);
 		super.mostrarButton.setVisible(false);
 		super.eliminarButton.setVisible(false);
-		setBounds(100, 100, 544, 301);
+
+		setBounds(100, 100, 543, 301);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(5, 281, 505, 20);
 		contentPanel.setLayout(new FlowLayout());
@@ -63,46 +65,43 @@ public class AddDelantero extends VentanaPadre {
 		getContentPane().add(contentPanel);
 
 		panaltilesSpinner = new JSpinner();
-		panaltilesSpinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		panaltilesSpinner.setBounds(476, 57, 29, 20);
+		panaltilesSpinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		getContentPane().add(panaltilesSpinner);
 
 		jugadCorSpinner = new JSpinner();
-		jugadCorSpinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		jugadCorSpinner.setBounds(476, 97, 29, 20);
+		jugadCorSpinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		getContentPane().add(jugadCorSpinner);
 
-		JLabel numGoles = new JLabel("Numero de goles");
-		numGoles.setBounds(367, 60, 111, 14);
-		getContentPane().add(numGoles);
+		JLabel numGolesJpiner = new JLabel("Numero de goles");
+		numGolesJpiner.setBounds(367, 60, 111, 14);
+		getContentPane().add(numGolesJpiner);
 
-		JLabel numAsistenciasJspiner = new JLabel("Numero de asistencias");
-		numAsistenciasJspiner.setBounds(367, 100, 85, 14);
-		getContentPane().add(numAsistenciasJspiner);
+		JLabel jugadasSpinner = new JLabel("Numero de pases");
+		jugadasSpinner.setBounds(367, 100, 111, 14);
+		getContentPane().add(jugadasSpinner);
 	}
 
 	@Override
 	protected void addFutbolista() {
-		
+
+		int numPases = (Integer) jugadCorSpinner.getModel().getValue();
 		int numGoles = (Integer) panaltilesSpinner.getModel().getValue();
-		int numAsistencias = (Integer) jugadCorSpinner.getModel().getValue();
 
 		try {
-			Gestion.addDelantero(nombreText.getText(), apellidoText.getText(),
+			Gestion.addMedio(nombreText.getText(), apellidoText.getText(),
 					(Integer) dorsalSpinner.getModel().getValue(), dniText.getText(), pieBueno(), apCombobox(),
-					new Fecha(fechaText.getText()), super.extraerSalarioValido(),  numGoles, numAsistencias);
-			JOptionPane.showMessageDialog(this, "Delantero añadido correctamente", "Jugador añadido",
+					new Fecha(fechaText.getText()), super.extraerSalarioValido(), numPases, numGoles);
+			JOptionPane.showMessageDialog(this, "Medio añadido correctamente", "Jugador añadido",
 					JOptionPane.INFORMATION_MESSAGE);
-			Gestion.setModificado(true);
+			//Gestion.setModificado(true);
 		} catch (NoEsDecimalException | DniInvalidoExceptions | CadenaVaciaException | AptitudNoValidaExecption
 				| PieNoValidaExecption | NumeroNegativoException | FechaNegativoException | JugadorYaExisteExeption
 				| JugadorNoExiste | FormatoNoValidoException | FechaNoValidaException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.INFORMATION_MESSAGE);
 		}
-		
-
-		
 
 	}
+
 }

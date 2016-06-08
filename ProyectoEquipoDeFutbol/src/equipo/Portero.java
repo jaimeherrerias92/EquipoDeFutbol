@@ -98,21 +98,13 @@ public class Portero extends Futbolista implements Asalariado {
 	public int getNumParadas() {
 		return numParadas;
 	}
-	 /**
-	 * 
-	 * @return
-	 * @throws FechaFuturaException
-	 * 
-	 * Calcula el salario total del portero
-	 */
-	
-	
+
 	public double getSalarioTotal() throws FechaFuturaException {
 		double salarioTotal = this.getSueldoBase();
 		double incremento = 0;
 		if (this.getGolesEncajados() > 20)
 			incremento = -5 / 100.0;
-		if (this.getGolesEncajados() > 30)
+		else if (this.getGolesEncajados() > 30)
 			incremento = -7 / 100.0;
 		else
 			incremento = 0;
@@ -122,7 +114,7 @@ public class Portero extends Futbolista implements Asalariado {
 		
 		if (this.getNumParadas() > 20)
 			incremento = 5 / 100.0;
-		if (this.getNumParadas() > 30)
+		else if (this.getNumParadas() > 30)
 			incremento = 7 / 100.0;
 		salarioTotal +=  this.getSueldoBase() * incremento;
 
@@ -130,7 +122,7 @@ public class Portero extends Futbolista implements Asalariado {
 
 		if (this.getFecha().calcularAnnosTranscurridos(getFecha())>1)
 			incremento = 6 / 100.0;
-		if (this.getFecha().calcularAnnosTranscurridos(getFecha())>2)
+		else if (this.getFecha().calcularAnnosTranscurridos(getFecha())>2)
 			incremento = 12 / 100.0;
 		else
 			incremento = 24 / 100.0;

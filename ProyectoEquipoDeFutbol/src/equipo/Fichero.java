@@ -28,12 +28,7 @@ public class Fichero {
 	 */
 	private static final String EQP = ".eqp";
 	public static File fichero = new File("Sin.titulo.eqp");
-	/**
-	 * Guarda el fichero
-	 * @param object
-	 * @param archivo
-	 * @throws IOException
-	 */
+
 	public static void guardar(Object object, File archivo) throws IOException {
 		archivo = annadirExtension(archivo);
 		try (ObjectOutputStream salida = new ObjectOutputStream(
@@ -42,14 +37,7 @@ public class Fichero {
 		}
 
 	}
-	/**
-	 * Lee el fichero
-	 * @param archivo
-	 * @return
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 * @throws ClassNotFoundException
-	 */
+
 	public static Object leer(File archivo) throws FileNotFoundException,
 			IOException, ClassNotFoundException {
 		archivo = annadirExtension(archivo);
@@ -58,20 +46,14 @@ public class Fichero {
 			return (Object) ois.readObject();
 		}
 	}
-	/**
-	 * Añade la extension .EQP
-	 */
+
 	public static File annadirExtension(File archivo) {
 		String extension = archivo.getPath();
 		if (!extension.endsWith(EQP))
 			return new File(archivo + EQP);
 		return archivo;
 	}
-	/**
-	 * Si existe el archivo
-	 * @param archivo
-	 * @return
-	 */
+
 	public static boolean confirmarExistencia(File archivo) {
 		archivo = annadirExtension(archivo);
 		return archivo.exists();

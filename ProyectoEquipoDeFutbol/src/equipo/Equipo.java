@@ -61,10 +61,13 @@ public class Equipo implements Serializable {
 				golesEncajados, porteriaACero);
 		if (listaJugadores.contains(portero))
 			throw new JugadorYaExisteExeption("El portero ya se ha creado");
-		if (existeDorsal(dorsal))
+		else if (existeDorsal(dorsal))
 			throw new JugadorYaExisteExeption("El dorsal ya esta en uso");
+		else if (portero == null)
+			throw new JugadorNoExiste("El jugador no puede ser nulo");
 
-		listaJugadores.add(portero);
+		else
+			listaJugadores.add(portero);
 
 	}
 
@@ -100,18 +103,20 @@ public class Equipo implements Serializable {
 				jugCortadas, porteriaACero);
 		if (listaJugadores.contains(defensa))
 			throw new JugadorYaExisteExeption("El defensa ya se ha creado");
-		if (existeDorsal(dorsal))
+		else if (existeDorsal(dorsal))
 			throw new JugadorYaExisteExeption("El dorsal ya esta en uso");
+		else if (defensa == null)
+			throw new JugadorNoExiste("El jugador no puede ser nulo");
+
 		else
 			listaJugadores.add(defensa);
 
 	}
 
 	public boolean existeDorsal(int dorsal) {
-		for (Futbolista f : listaJugadores) {
+		for (Futbolista f : listaJugadores)
 			if (f.getDorsal() == dorsal)
 				return true;
-		}
 		return false;
 
 	}
@@ -121,15 +126,8 @@ public class Equipo implements Serializable {
 		int index = listaJugadores.indexOf(new Futbolista(dni));
 		if (index != -1)
 			return listaJugadores.get(index);
-		throw new JugadorNoExiste("El jugador no existe");
-	}
-
-	Futbolista get1(String dni)
-			throws JugadorNoExiste, NumeroNegativoException, DniInvalidoExceptions, CadenaVaciaException {
-		int index = listaJugadores.indexOf(new Futbolista(dni));
-		if (index == -1)
+		else
 			throw new JugadorNoExiste("El jugador no existe");
-		return listaJugadores.get(index);
 	}
 
 	/**
@@ -163,8 +161,10 @@ public class Equipo implements Serializable {
 
 		if (listaJugadores.contains(medio))
 			throw new JugadorYaExisteExeption("El medioCentro ya se ha creado");
-		if (existeDorsal(dorsal))
+		else if (existeDorsal(dorsal))
 			throw new JugadorYaExisteExeption("El dorsal ya esta en uso");
+		else if (medio == null)
+			throw new JugadorNoExiste("El jugador no puede ser nulo");
 		else
 			listaJugadores.add(medio);
 
@@ -200,23 +200,14 @@ public class Equipo implements Serializable {
 				numAsistencias);
 		if (listaJugadores.contains(delantero))
 			throw new JugadorYaExisteExeption("El delantero ya se ha creado");
-		if (existeDorsal(dorsal))
+		else if (existeDorsal(dorsal))
 			throw new JugadorYaExisteExeption("El dorsal ya esta en uso");
+		else if (delantero == null)
+			throw new JugadorNoExiste("El jugador no puede ser nulo");
 		else
 			listaJugadores.add(delantero);
 
 	}
-
-	/**
-	 * DEVUELVE UN jugador por dni
-	 * 
-	 * @param dni
-	 * @return
-	 * @throws NumeroNegativoException
-	 * @throws DniInvalidoExceptions
-	 * @throws JugadorNoExiste
-	 * @throws CadenaVaciaException
-	 */
 
 	Futbolista mostrarDni(String dni)
 			throws NumeroNegativoException, DniInvalidoExceptions, JugadorNoExiste, CadenaVaciaException {
@@ -231,7 +222,7 @@ public class Equipo implements Serializable {
 	/**
 	 * 
 	 * @param dni
-	 * @return lo elimina
+	 * @return
 	 * @throws JugadorNoExiste
 	 * @throws NumeroNegativoException
 	 * @throws DniInvalidoExceptions
@@ -240,9 +231,10 @@ public class Equipo implements Serializable {
 	public void eliminarPorDni(String dni)
 			throws JugadorNoExiste, NumeroNegativoException, DniInvalidoExceptions, CadenaVaciaException {
 		Futbolista f = new Futbolista(dni);
-		if (listaJugadores.contains(f))
-			listaJugadores.remove(f);
-		throw new JugadorNoExiste("El jugador no existe");
+		if (!listaJugadores.contains(f))
+			throw new JugadorNoExiste("El jugador no existe");
+
+		listaJugadores.remove(f);
 
 	}
 
@@ -307,10 +299,6 @@ public class Equipo implements Serializable {
 
 	}
 
-	/**
-	 * 
-	 * @return arraylist de maximos goleadores
-	 */
 	public ArrayList<Goleadores> maximosGoleadores() {
 
 		ArrayList<Goleadores> listaGoleadores = new ArrayList<Goleadores>();
@@ -324,10 +312,6 @@ public class Equipo implements Serializable {
 
 	}
 
-	/**
-	 * 
-	 * @return arrayList de maximos pasadores
-	 */
 	public ArrayList<MedioCentro> maximosPasadores() {
 
 		ArrayList<MedioCentro> listaPasadores = new ArrayList<MedioCentro>();
@@ -346,16 +330,12 @@ public class Equipo implements Serializable {
 		return "Equipo [listaJugadores=" + listaJugadores + "]";
 	}
 
-	/**
-	 * Vacia la lista de jugadores
-	 */
 	public void vaciar() {
 		listaJugadores.clear();
 	}
 
 	/**
-	 * @return numero de jugadores en la lista
-	 * 
+	 * @return
 	 */
 	public int size() {
 

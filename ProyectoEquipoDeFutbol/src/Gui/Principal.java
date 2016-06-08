@@ -45,7 +45,7 @@ public class Principal extends javax.swing.JFrame {
 
 	private JFileChooser guardar = new JFileChooser();
 
-	private FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos .eqp", "eqp");
+	private FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos.eqp", "eqp");
 
 	private File file;
 
@@ -345,7 +345,7 @@ public class Principal extends javax.swing.JFrame {
 	private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
 		guardar();
 
-	}// GEN-LAST:event_jMenuItem1ActionPerformed
+	}
 
 	private void guardadoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_guardadoActionPerformed
 		guardarComo();
@@ -354,7 +354,7 @@ public class Principal extends javax.swing.JFrame {
 
 	private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
 		actionAbrir();
-	}// GEN-LAST:event_jMenuItem3ActionPerformed
+	}
 
 	private void salirActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_salirActionPerformed
 
@@ -491,7 +491,8 @@ public class Principal extends javax.swing.JFrame {
 					file = guardar.getSelectedFile();
 					
 					try {
-						Fichero.guardar(Gestion.getEquipo(), file);
+						Gestion.guardar(Gestion.getEquipo(), file);
+						//Fichero.guardar(Gestion.getEquipo(), file);
 						System.exit(0);
 					} catch (FileNotFoundException e1) {
 						JOptionPane.showMessageDialog(this, "El archivo no se ha encontrado", "Error",
@@ -524,7 +525,8 @@ public class Principal extends javax.swing.JFrame {
 				if (opcion == JFileChooser.APPROVE_OPTION) {
 					file = guardar.getSelectedFile();
 					try {
-						Fichero.guardar(Gestion.getEquipo(), file);
+						
+						Gestion.guardar(Gestion.getEquipo(), file);
 					} catch (FileNotFoundException e1) {
 						JOptionPane.showMessageDialog(this, "El archivo no se ha encontrado", "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -556,7 +558,7 @@ public class Principal extends javax.swing.JFrame {
 				if (opcion == JFileChooser.APPROVE_OPTION) {
 					file = guardar.getSelectedFile();
 					try {
-						Fichero.guardar(Gestion.getEquipo(), file);
+						Gestion.guardar(Gestion.getEquipo(), file);
 					} catch (FileNotFoundException e1) {
 						JOptionPane.showMessageDialog(this, "El archivo no se ha encontrado", "Error",
 								JOptionPane.ERROR_MESSAGE);
@@ -599,7 +601,7 @@ public class Principal extends javax.swing.JFrame {
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(this, "Error en lectura o escritura del fichero", "Error", JOptionPane.ERROR_MESSAGE);
 			}
-			Gestion.setModificado(false);
+			//Gestion.setModificado(false);
 		}
 	}
 
@@ -611,7 +613,8 @@ public class Principal extends javax.swing.JFrame {
 			if (opcion == JFileChooser.APPROVE_OPTION) {
 				file = guardar.getSelectedFile();
 				try {
-					Fichero.guardar(Gestion.getEquipo(), file);
+					Gestion.guardar(Gestion.getEquipo(), file);
+					//Fichero.guardar(Gestion.getEquipo(), file);
 					this.setTitle(file.getName());
 				} catch (FileNotFoundException e1) {
 					JOptionPane.showMessageDialog(this, "El archivo no se ha encontrado", "Error",
@@ -621,14 +624,15 @@ public class Principal extends javax.swing.JFrame {
 							JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();
 				}
-				Gestion.setModificado(false);
-				Gestion.setArchivoSeleccionado(file);
+				//Gestion.setModificado(false);
+			//	Gestion.setArchivoSeleccionado(file);
 			} else if (opcion == JFileChooser.CANCEL_OPTION)
 				nuevo.setVisible(false);
 		} else
 			try {
-				Fichero.guardar(Gestion.getEquipo(), file);
-				Gestion.setModificado(false);
+				Gestion.guardar(Gestion.getEquipo(), file);
+//				Fichero.guardar(Gestion.getEquipo(), file);
+//				Gestion.setModificado(false);
 			} catch (IOException e) {
 				JOptionPane.showMessageDialog(this, "Error en lectura o escritura del fichero", "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -642,9 +646,10 @@ public class Principal extends javax.swing.JFrame {
 			file = guardarComo.getSelectedFile();
 			try {
 				if (deseaSobreescribir()) {
-					Fichero.guardar(Gestion.getEquipo(), file);
+					Gestion.guardar(Gestion.getEquipo(), file);
+					//Fichero.guardar(Gestion.getEquipo(), file);
 					this.setTitle(file.getName());
-					Gestion.setModificado(false);
+					//Gestion.setModificado(false);
 				}
 			} catch (FileNotFoundException e1) {
 				JOptionPane.showMessageDialog(this, "El archivo no se ha encontrado", "Error",

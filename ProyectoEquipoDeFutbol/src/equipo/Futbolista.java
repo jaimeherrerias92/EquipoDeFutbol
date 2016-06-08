@@ -70,10 +70,6 @@ public class Futbolista implements Serializable {
 		setFecha(fecha);
 
 	}
-	/**
-	 * 
-	 * @return
-	 */
 	public int getDorsal(){
 		return dorsal;
 	}

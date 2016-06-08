@@ -8,7 +8,7 @@ import java.util.Comparator;
 /**
  * @author Jaime Herrerias
  * @version 1.0
- * Interfaz compara goleadores
+ *
  */
 public class ComparadorGolesDesc implements Comparator<Goleadores> {
 

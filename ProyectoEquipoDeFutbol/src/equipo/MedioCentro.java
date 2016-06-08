@@ -3,27 +3,22 @@
  */
 package equipo;
 
-import utilesFechas.Fecha;
-import utilesFechas.FechaFuturaException;
-
-import java.util.Comparator;
-
 import equipo.excepciones.AptitudNoValidaExecption;
 import equipo.excepciones.CadenaVaciaException;
 import equipo.excepciones.DniInvalidoExceptions;
 import equipo.excepciones.FechaNegativoException;
 import equipo.excepciones.NumeroNegativoException;
 import equipo.excepciones.PieNoValidaExecption;
+import utilesFechas.Fecha;
+import utilesFechas.FechaFuturaException;
 
 /**
  * @author Jaime Herrerias
  * @version 1.0
  *
  */
-public class Delantero extends Goleadores implements Asalariado{
-
-	private int numAsistencias;
-
+public class MedioCentro extends Goleadores implements Asalariado {
+	private int numPases;
 	/**
 	 * @param nombre
 	 * @param apellido
@@ -37,40 +32,42 @@ public class Delantero extends Goleadores implements Asalariado{
 	 * @throws AptitudNoValidaExecption
 	 * @throws PieNoValidaExecption
 	 * @throws NumeroNegativoException
-	 * @throws FechaNegativoException
+	 * @throws FechaNegativoException 
 	 */
-	public Delantero(String nombre, String apellido, int dorsal, String dni, PieBueno pie, Aptitud aptitud, Fecha fecha,
-			double sueldoBase, int numGoles, int numAsistencias) throws DniInvalidoExceptions, CadenaVaciaException,
-					AptitudNoValidaExecption, PieNoValidaExecption, NumeroNegativoException, FechaNegativoException {
-		super(nombre, apellido, dorsal, dni, pie, aptitud, sueldoBase, fecha, numGoles);
-		setNumAsistencias(numAsistencias);
+	public MedioCentro(String nombre, String apellido, int dorsal, String dni, PieBueno pie, Aptitud aptitud,Fecha fecha,
+			double sueldoBase,int numPases, int numGoles) throws DniInvalidoExceptions, CadenaVaciaException, AptitudNoValidaExecption,
+					PieNoValidaExecption, NumeroNegativoException, FechaNegativoException {
+		super(nombre, apellido, dorsal, dni, pie, aptitud, sueldoBase, fecha,numGoles);
+		
+		setNumPases(numPases);		
+	}
+
+	public int getNumPases() {
+		return numPases;
 	}
 
 	/**
-	 * @param numAsistencias2
-	 * @throws NumeroNegativoException
+	 * @param numPases2
+	 * @throws NumeroNegativoException 
 	 */
-	private void setNumAsistencias(int numAsistencias) throws NumeroNegativoException {
-		if (numAsistencias < 0)
-			throw new NumeroNegativoException("El numero de axistencias no puede ser negativo");
-		this.numAsistencias = numAsistencias;
+	
+	
 
+	private void setNumPases(int numPases) throws NumeroNegativoException {
+		if(numPases<0)
+			throw new NumeroNegativoException("El numero de pases no puede ser negativo");
+		this.numPases=numPases;
+		
 	}
-	/**
-	 * 
-	 * @return
-	 * @throws FechaFuturaException
-	 * 
-	 * Calcula el salario total del delantero
-	 */
+	
 	
 	public double getSalarioTotal() throws FechaFuturaException {
 		double salarioTotal = this.getSueldoBase();
 		double incremento = 0;
 
-		if (this.getNumAsistencias() > 20) {
+		if (this.getNumPases() > 20) {
 			incremento = 5 / 100.0;
-		} else if (this.getNumAsistencias() > 30) {
+		} else if (this.getNumPases() > 30) {
 			incremento = 7 / 100.0;
 		} else {
 			incremento = 0;
@@ -97,10 +94,6 @@ public class Delantero extends Goleadores implements Asalariado{
 		salarioTotal +=  this.getSueldoBase() * incremento;
 		return salarioTotal;
 
-	}
-
-	public int getNumAsistencias() {
-		return numAsistencias;
 	}
 
 }

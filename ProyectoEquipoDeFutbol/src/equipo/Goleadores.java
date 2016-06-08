@@ -33,8 +33,6 @@ public class Goleadores extends Futbolista {
 	 * @throws PieNoValidaExecption
 	 * @throws NumeroNegativoException
 	 * @throws FechaNegativoException
-	 * 
-	 * Clase intermedia que recoje goleadores ( de mediocentros y delanteros)
 	 */
 	public Goleadores(String nombre, String apellido, int dorsal, String dni, PieBueno pie, Aptitud aptitud,
 			double sueldoBase, Fecha fecha, int numGoles) throws DniInvalidoExceptions, CadenaVaciaException,
